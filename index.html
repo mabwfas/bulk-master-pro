@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BulkMaster Pro - Bulk Order Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #8b5cf6;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-dark: #0f0f23;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text: #ffffff;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --glow: rgba(16, 185, 129, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge-pro {
+            background: linear-gradient(135deg, var(--secondary), #a78bfa);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            min-width: 300px;
+        }
+
+        .search-box i {
+            color: var(--text-muted);
+            margin-right: 0.75rem;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 0.95rem;
+            outline: none;
+            width: 100%;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .toolbar-right {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px var(--glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-card);
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .stat-icon.total {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+        }
+
+        .stat-icon.pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .stat-icon.fulfilled {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--secondary);
+        }
+
+        .stat-icon.refunded {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .orders-table {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .checkbox-custom.checked {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox-custom.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .order-id {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .customer-name {
+            font-weight: 500;
+        }
+
+        .customer-email {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .status-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-badge.paid {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+        }
+
+        .status-badge.pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status-badge.refunded {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .status-badge.fulfilled {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--secondary);
+        }
+
+        .bulk-actions {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: none;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bulk-actions.active {
+            display: flex;
+        }
+
+        .selected-count {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .stats-bar {
+                flex-direction: column;
+            }
+
+            .toolbar {
+                flex-direction: column;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th,
+            td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gradient"></div>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-boxes-stacked"></i>
+            <span>BulkMaster</span>
+            <span class="badge-pro">PRO</span>
+        </div>
+        <nav>
+            <a href="landing.html" style="color: var(--text-muted); text-decoration: none;">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-icon total"><i class="fas fa-shopping-bag"></i></div>
+                <div>
+                    <div class="stat-value" id="totalOrders">156</div>
+                    <div class="stat-label">Total Orders</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon pending"><i class="fas fa-clock"></i></div>
+                <div>
+                    <div class="stat-value" id="pendingOrders">23</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon fulfilled"><i class="fas fa-truck"></i></div>
+                <div>
+                    <div class="stat-value" id="fulfilledOrders">118</div>
+                    <div class="stat-label">Fulfilled</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon refunded"><i class="fas fa-rotate-left"></i></div>
+                <div>
+                    <div class="stat-value" id="refundedOrders">15</div>
+                    <div class="stat-label">Refunded</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search orders..." id="searchInput">
+                </div>
+                <button class="filter-btn">
+                    <i class="fas fa-filter"></i>
+                    Filters
+                </button>
+            </div>
+            <div class="toolbar-right">
+                <button class="btn btn-outline" onclick="exportOrders()">
+                    <i class="fas fa-download"></i>
+                    Export
+                </button>
+                <button class="btn btn-primary" onclick="refreshOrders()">
+                    <i class="fas fa-sync"></i>
+                    Refresh
+                </button>
+            </div>
+        </div>
+
+        <div class="bulk-actions" id="bulkActions">
+            <span><span class="selected-count" id="selectedCount">0</span> orders selected</span>
+            <button class="btn btn-primary" onclick="bulkFulfill()">
+                <i class="fas fa-truck"></i> Fulfill All
+            </button>
+            <button class="btn btn-warning" onclick="bulkCancel()">
+                <i class="fas fa-ban"></i> Cancel All
+            </button>
+            <button class="btn btn-danger" onclick="bulkRefund()">
+                <i class="fas fa-rotate-left"></i> Refund All
+            </button>
+            <button class="btn btn-outline" onclick="clearSelection()">
+                <i class="fas fa-times"></i> Clear
+            </button>
+        </div>
+
+        <div class="orders-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="checkbox-custom" id="selectAll" onclick="toggleSelectAll()"></div>
+                        </th>
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>Status</th>
+                        <th>Fulfillment</th>
+                        <th>Total</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersBody">
+                    <!-- Dynamic -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="#">ShopifyHero Tools</a> suite</p>
+    </footer>
+
+    <script>
+        const orders = [
+            { id: '#1089', customer: 'Emma Wilson', email: 'emma@example.com', status: 'paid', fulfillment: 'fulfilled', total: 129.99, date: '2024-12-18' },
+            { id: '#1088', customer: 'Michael Chen', email: 'mchen@example.com', status: 'paid', fulfillment: 'pending', total: 89.50, date: '2024-12-18' },
+            { id: '#1087', customer: 'Sarah Johnson', email: 'sarah.j@example.com', status: 'pending', fulfillment: 'pending', total: 245.00, date: '2024-12-17' },
+            { id: '#1086', customer: 'David Brown', email: 'dbrown@example.com', status: 'paid', fulfillment: 'fulfilled', total: 67.99, date: '2024-12-17' },
+            { id: '#1085', customer: 'Lisa Anderson', email: 'lisa.a@example.com', status: 'refunded', fulfillment: 'cancelled', total: 199.00, date: '2024-12-16' },
+            { id: '#1084', customer: 'James Miller', email: 'jmiller@example.com', status: 'paid', fulfillment: 'pending', total: 312.50, date: '2024-12-16' },
+            { id: '#1083', customer: 'Amanda Davis', email: 'amanda@example.com', status: 'paid', fulfillment: 'fulfilled', total: 55.00, date: '2024-12-15' },
+            { id: '#1082', customer: 'Robert Taylor', email: 'rtaylor@example.com', status: 'pending', fulfillment: 'pending', total: 178.99, date: '2024-12-15' },
+        ];
+
+        let selectedOrders = new Set();
+
+        function renderOrders() {
+            const tbody = document.getElementById('ordersBody');
+            tbody.innerHTML = orders.map(order => `
+                <tr>
+                    <td>
+                        <div class="checkbox-custom ${selectedOrders.has(order.id) ? 'checked' : ''}" 
+                             onclick="toggleOrder('${order.id}')"></div>
+                    </td>
+                    <td><span class="order-id">${order.id}</span></td>
+                    <td>
+                        <div class="customer-name">${order.customer}</div>
+                        <div class="customer-email">${order.email}</div>
+                    </td>
+                    <td><span class="status-badge ${order.status}">${order.status}</span></td>
+                    <td><span class="status-badge ${order.fulfillment}">${order.fulfillment}</span></td>
+                    <td>$${order.total.toFixed(2)}</td>
+                    <td>${order.date}</td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleOrder(id) {
+            if (selectedOrders.has(id)) {
+                selectedOrders.delete(id);
+            } else {
+                selectedOrders.add(id);
+            }
+            updateSelection();
+            renderOrders();
+        }
+
+        function toggleSelectAll() {
+            const selectAllEl = document.getElementById('selectAll');
+            if (selectedOrders.size === orders.length) {
+                selectedOrders.clear();
+                selectAllEl.classList.remove('checked');
+            } else {
+                orders.forEach(o => selectedOrders.add(o.id));
+                selectAllEl.classList.add('checked');
+            }
+            updateSelection();
+            renderOrders();
+        }
+
+        function updateSelection() {
+            const count = selectedOrders.size;
+            document.getElementById('selectedCount').textContent = count;
+            document.getElementById('bulkActions').classList.toggle('active', count > 0);
+        }
+
+        function clearSelection() {
+            selectedOrders.clear();
+            document.getElementById('selectAll').classList.remove('checked');
+            updateSelection();
+            renderOrders();
+        }
+
+        function bulkFulfill() {
+            alert(`Fulfilling ${selectedOrders.size} orders...`);
+        }
+
+        function bulkCancel() {
+            alert(`Cancelling ${selectedOrders.size} orders...`);
+        }
+
+        function bulkRefund() {
+            if (confirm(`Are you sure you want to refund ${selectedOrders.size} orders?`)) {
+                alert(`Refunding ${selectedOrders.size} orders...`);
+            }
+        }
+
+        function exportOrders() {
+            alert('Exporting orders to CSV...');
+        }
+
+        function refreshOrders() {
+            alert('Refreshing order list...');
+        }
+
+        // Initial render
+        renderOrders();
+    </script>
+</body>
+
+</html>
