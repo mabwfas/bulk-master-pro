@@ -10,17 +10,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
+            --primary: #06b6d4;
+            --primary-dark: #0891b2;
             --secondary: #8b5cf6;
+            --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
             --bg-dark: #0f0f23;
             --bg-card: rgba(255, 255, 255, 0.05);
-            --text: #ffffff;
+            --text: #fff;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.1);
-            --glow: rgba(16, 185, 129, 0.5);
         }
 
         * {
@@ -39,9 +39,7 @@
         .bg-gradient {
             position: fixed;
             inset: 0;
-            background:
-                radial-gradient(ellipse at 30% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 20% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
             z-index: -1;
         }
 
@@ -49,17 +47,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
+            padding: 1rem 2rem;
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
@@ -68,95 +68,51 @@
         }
 
         .logo span {
-            background: linear-gradient(135deg, var(--primary), #34d399);
+            background: linear-gradient(135deg, var(--primary), #22d3ee);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .badge-pro {
-            background: linear-gradient(135deg, var(--secondary), #a78bfa);
-            color: #fff;
-            font-size: 0.65rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 700;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
         .toolbar-left {
             display: flex;
+            gap: 0.75rem;
             align-items: center;
-            gap: 1rem;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
-            min-width: 300px;
-        }
-
-        .search-box i {
-            color: var(--text-muted);
-            margin-right: 0.75rem;
-        }
-
-        .search-box input {
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 0.95rem;
-            outline: none;
-            width: 100%;
-        }
-
-        .filter-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--primary);
+            flex-wrap: wrap;
         }
 
         .toolbar-right {
             display: flex;
             gap: 0.75rem;
+            align-items: center;
         }
 
         .btn {
-            padding: 0.75rem 1.25rem;
+            padding: 0.6rem 1.2rem;
             border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -164,22 +120,26 @@
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 4px 15px var(--glow);
+            color: #fff;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger), #dc2626);
-            color: white;
+        .btn-success {
+            background: var(--success);
+            color: #fff;
         }
 
         .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #d97706);
-            color: white;
+            background: var(--warning);
+            color: #000;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #fff;
         }
 
         .btn-outline {
@@ -188,40 +148,88 @@
             color: var(--text);
         }
 
-        .btn-outline:hover {
-            background: var(--bg-card);
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0 1rem;
+        }
+
+        .search-box i {
+            color: var(--text-muted);
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 0.6rem;
+            color: var(--text);
+            width: 200px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .filter-dropdown select {
+            appearance: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.6rem 2rem 0.6rem 1rem;
+            color: var(--text);
+            cursor: pointer;
         }
 
         .stats-bar {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-item {
+            gap: 2rem;
+            padding: 1rem 1.5rem;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            flex: 1;
+            margin-bottom: 1rem;
+        }
+
+        .stat-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
         }
 
         .stat-icon.total {
-            background: rgba(16, 185, 129, 0.2);
+            background: rgba(6, 182, 212, 0.2);
             color: var(--primary);
+        }
+
+        .stat-icon.selected {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--secondary);
+        }
+
+        .stat-icon.fulfilled {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
         }
 
         .stat-icon.pending {
@@ -229,27 +237,17 @@
             color: var(--warning);
         }
 
-        .stat-icon.fulfilled {
-            background: rgba(139, 92, 246, 0.2);
-            color: var(--secondary);
-        }
-
-        .stat-icon.refunded {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-        }
-
         .stat-value {
-            font-size: 1.75rem;
+            font-size: 1.25rem;
             font-weight: 700;
         }
 
         .stat-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
-        .orders-table {
+        .table-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
@@ -262,46 +260,44 @@
         }
 
         th {
-            text-align: left;
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             background: rgba(255, 255, 255, 0.03);
             color: var(--text-muted);
             font-weight: 500;
             font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            text-align: left;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            color: var(--text);
+        }
+
+        th i {
+            margin-left: 0.5rem;
+            opacity: 0.5;
         }
 
         td {
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             border-top: 1px solid var(--border);
         }
 
-        tr:hover td {
+        tr:hover {
             background: rgba(255, 255, 255, 0.02);
         }
 
-        .checkbox-custom {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-radius: 4px;
+        .checkbox-cell {
+            width: 50px;
+            text-align: center;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .checkbox-custom.checked {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .checkbox-custom.checked::after {
-            content: '✓';
-            color: white;
-            font-size: 0.75rem;
         }
 
         .order-id {
@@ -309,12 +305,30 @@
             color: var(--primary);
         }
 
+        .customer-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .customer-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
         .customer-name {
             font-weight: 500;
         }
 
         .customer-email {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
@@ -325,9 +339,9 @@
             font-weight: 500;
         }
 
-        .status-badge.paid {
+        .status-badge.fulfilled {
             background: rgba(16, 185, 129, 0.2);
-            color: var(--primary);
+            color: var(--success);
         }
 
         .status-badge.pending {
@@ -335,70 +349,171 @@
             color: var(--warning);
         }
 
-        .status-badge.refunded {
+        .status-badge.cancelled {
             background: rgba(239, 68, 68, 0.2);
             color: var(--danger);
         }
 
-        .status-badge.fulfilled {
-            background: rgba(139, 92, 246, 0.2);
-            color: var(--secondary);
+        .status-badge.processing {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--primary);
         }
 
-        .bulk-actions {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(139, 92, 246, 0.1));
-            border: 1px solid var(--primary);
-            border-radius: 12px;
+        .amount {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .items-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background: var(--bg-card);
+            color: var(--text);
+            border-color: var(--primary);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .page-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .page-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .page-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .bulk-actions-panel {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
             display: none;
             align-items: center;
             gap: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 200;
         }
 
-        .bulk-actions.active {
+        .bulk-actions-panel.active {
             display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
 
         .selected-count {
             font-weight: 600;
             color: var(--primary);
+            min-width: 80px;
+        }
+
+        .progress-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .progress-modal.active {
+            display: flex;
+        }
+
+        .progress-content {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 400px;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 6px;
+            transition: width 0.3s;
+        }
+
+        .progress-status {
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
         footer {
             text-align: center;
-            padding: 3rem;
+            padding: 2rem;
             color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            margin-top: 3rem;
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .stats-bar {
-                flex-direction: column;
-            }
-
-            .toolbar {
-                flex-direction: column;
-            }
-
-            .search-box {
-                min-width: 100%;
-            }
-
-            table {
-                font-size: 0.85rem;
-            }
-
-            th,
-            td {
-                padding: 0.75rem;
-            }
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -407,110 +522,122 @@
     <div class="bg-gradient"></div>
 
     <header>
-        <div class="logo">
-            <i class="fas fa-boxes-stacked"></i>
-            <span>BulkMaster</span>
-            <span class="badge-pro">PRO</span>
+        <div class="logo"><i class="fas fa-boxes-stacked"></i><span>BulkMaster Pro</span></div>
+        <div style="display: flex; gap: 1rem;">
+            <button class="btn btn-outline"><i class="fas fa-download"></i> Export</button>
+            <button class="btn btn-primary"><i class="fas fa-sync"></i> Sync Orders</button>
         </div>
-        <nav>
-            <a href="landing.html" style="color: var(--text-muted); text-decoration: none;">
-                <i class="fas fa-home"></i> Home
-            </a>
-        </nav>
     </header>
 
     <main class="container">
         <div class="stats-bar">
             <div class="stat-item">
-                <div class="stat-icon total"><i class="fas fa-shopping-bag"></i></div>
+                <div class="stat-icon total"><i class="fas fa-shopping-cart"></i></div>
                 <div>
                     <div class="stat-value" id="totalOrders">156</div>
                     <div class="stat-label">Total Orders</div>
                 </div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon pending"><i class="fas fa-clock"></i></div>
+                <div class="stat-icon selected"><i class="fas fa-check-square"></i></div>
                 <div>
-                    <div class="stat-value" id="pendingOrders">23</div>
-                    <div class="stat-label">Pending</div>
+                    <div class="stat-value" id="selectedCount">0</div>
+                    <div class="stat-label">Selected</div>
                 </div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon fulfilled"><i class="fas fa-truck"></i></div>
+                <div class="stat-icon fulfilled"><i class="fas fa-check-circle"></i></div>
                 <div>
-                    <div class="stat-value" id="fulfilledOrders">118</div>
+                    <div class="stat-value">89</div>
                     <div class="stat-label">Fulfilled</div>
                 </div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon refunded"><i class="fas fa-rotate-left"></i></div>
+                <div class="stat-icon pending"><i class="fas fa-clock"></i></div>
                 <div>
-                    <div class="stat-value" id="refundedOrders">15</div>
-                    <div class="stat-label">Refunded</div>
+                    <div class="stat-value">67</div>
+                    <div class="stat-label">Pending</div>
                 </div>
             </div>
         </div>
 
         <div class="toolbar">
             <div class="toolbar-left">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search orders..." id="searchInput">
+                <div class="search-box"><i class="fas fa-search"></i><input type="text" placeholder="Search orders..."
+                        id="searchInput" oninput="filterOrders()"></div>
+                <div class="filter-dropdown">
+                    <select id="statusFilter" onchange="filterOrders()">
+                        <option value="">All Status</option>
+                        <option value="fulfilled">Fulfilled</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
                 </div>
-                <button class="filter-btn">
-                    <i class="fas fa-filter"></i>
-                    Filters
-                </button>
+                <div class="filter-dropdown">
+                    <select id="dateFilter">
+                        <option value="all">All Time</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
             </div>
             <div class="toolbar-right">
-                <button class="btn btn-outline" onclick="exportOrders()">
-                    <i class="fas fa-download"></i>
-                    Export
-                </button>
-                <button class="btn btn-primary" onclick="refreshOrders()">
-                    <i class="fas fa-sync"></i>
-                    Refresh
-                </button>
+                <button class="btn btn-outline" onclick="selectAll()"><i class="fas fa-check-double"></i> Select
+                    All</button>
+                <button class="btn btn-outline" onclick="clearSelection()"><i class="fas fa-times"></i> Clear</button>
             </div>
         </div>
 
-        <div class="bulk-actions" id="bulkActions">
-            <span><span class="selected-count" id="selectedCount">0</span> orders selected</span>
-            <button class="btn btn-primary" onclick="bulkFulfill()">
-                <i class="fas fa-truck"></i> Fulfill All
-            </button>
-            <button class="btn btn-warning" onclick="bulkCancel()">
-                <i class="fas fa-ban"></i> Cancel All
-            </button>
-            <button class="btn btn-danger" onclick="bulkRefund()">
-                <i class="fas fa-rotate-left"></i> Refund All
-            </button>
-            <button class="btn btn-outline" onclick="clearSelection()">
-                <i class="fas fa-times"></i> Clear
-            </button>
-        </div>
-
-        <div class="orders-table">
+        <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>
-                            <div class="checkbox-custom" id="selectAll" onclick="toggleSelectAll()"></div>
-                        </th>
-                        <th>Order</th>
-                        <th>Customer</th>
-                        <th>Status</th>
-                        <th>Fulfillment</th>
-                        <th>Total</th>
-                        <th>Date</th>
+                        <th class="checkbox-cell"><input type="checkbox" class="checkbox" id="selectAllCheckbox"
+                                onchange="toggleSelectAll()"></th>
+                        <th onclick="sortTable('id')">Order <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('customer')">Customer <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('date')">Date <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('status')">Status <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('items')">Items <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable('amount')">Amount <i class="fas fa-sort"></i></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="ordersBody">
-                    <!-- Dynamic -->
-                </tbody>
+                <tbody id="ordersTable"></tbody>
             </table>
+            <div class="pagination">
+                <div class="page-info">Showing 1-10 of 156 orders</div>
+                <div class="page-buttons">
+                    <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
         </div>
     </main>
+
+    <div class="bulk-actions-panel" id="bulkPanel">
+        <span class="selected-count"><span id="bulkCount">0</span> selected</span>
+        <button class="btn btn-success" onclick="bulkAction('fulfill')"><i class="fas fa-check"></i> Fulfill</button>
+        <button class="btn btn-warning" onclick="bulkAction('print')"><i class="fas fa-print"></i> Print Labels</button>
+        <button class="btn btn-primary" onclick="bulkAction('export')"><i class="fas fa-file-export"></i>
+            Export</button>
+        <button class="btn btn-danger" onclick="bulkAction('cancel')"><i class="fas fa-ban"></i> Cancel</button>
+    </div>
+
+    <div class="progress-modal" id="progressModal">
+        <div class="progress-content">
+            <h3 id="progressTitle">Processing Orders...</h3>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-status" id="progressStatus">0 / 0 completed</div>
+        </div>
+    </div>
 
     <footer>
         <p>Part of the <a href="#">ShopifyHero Tools</a> suite</p>
@@ -518,98 +645,99 @@
 
     <script>
         const orders = [
-            { id: '#1089', customer: 'Emma Wilson', email: 'emma@example.com', status: 'paid', fulfillment: 'fulfilled', total: 129.99, date: '2024-12-18' },
-            { id: '#1088', customer: 'Michael Chen', email: 'mchen@example.com', status: 'paid', fulfillment: 'pending', total: 89.50, date: '2024-12-18' },
-            { id: '#1087', customer: 'Sarah Johnson', email: 'sarah.j@example.com', status: 'pending', fulfillment: 'pending', total: 245.00, date: '2024-12-17' },
-            { id: '#1086', customer: 'David Brown', email: 'dbrown@example.com', status: 'paid', fulfillment: 'fulfilled', total: 67.99, date: '2024-12-17' },
-            { id: '#1085', customer: 'Lisa Anderson', email: 'lisa.a@example.com', status: 'refunded', fulfillment: 'cancelled', total: 199.00, date: '2024-12-16' },
-            { id: '#1084', customer: 'James Miller', email: 'jmiller@example.com', status: 'paid', fulfillment: 'pending', total: 312.50, date: '2024-12-16' },
-            { id: '#1083', customer: 'Amanda Davis', email: 'amanda@example.com', status: 'paid', fulfillment: 'fulfilled', total: 55.00, date: '2024-12-15' },
-            { id: '#1082', customer: 'Robert Taylor', email: 'rtaylor@example.com', status: 'pending', fulfillment: 'pending', total: 178.99, date: '2024-12-15' },
+            { id: '#1089', customer: 'John Doe', email: 'john@email.com', date: 'Dec 18, 2024', status: 'pending', items: 3, amount: 189.99 },
+            { id: '#1088', customer: 'Sarah Miller', email: 'sarah@email.com', date: 'Dec 18, 2024', status: 'fulfilled', items: 1, amount: 49.99 },
+            { id: '#1087', customer: 'Mike Johnson', email: 'mike@email.com', date: 'Dec 17, 2024', status: 'processing', items: 5, amount: 299.00 },
+            { id: '#1086', customer: 'Emily Brown', email: 'emily@email.com', date: 'Dec 17, 2024', status: 'fulfilled', items: 2, amount: 129.50 },
+            { id: '#1085', customer: 'David Wilson', email: 'david@email.com', date: 'Dec 16, 2024', status: 'pending', items: 1, amount: 79.99 },
+            { id: '#1084', customer: 'Lisa Anderson', email: 'lisa@email.com', date: 'Dec 16, 2024', status: 'cancelled', items: 4, amount: 450.00 },
+            { id: '#1083', customer: 'James Taylor', email: 'james@email.com', date: 'Dec 15, 2024', status: 'fulfilled', items: 2, amount: 199.99 },
+            { id: '#1082', customer: 'Jennifer Lee', email: 'jen@email.com', date: 'Dec 15, 2024', status: 'pending', items: 1, amount: 34.99 },
         ];
 
         let selectedOrders = new Set();
 
-        function renderOrders() {
-            const tbody = document.getElementById('ordersBody');
-            tbody.innerHTML = orders.map(order => `
+        function renderOrders(data = orders) {
+            const tbody = document.getElementById('ordersTable');
+            tbody.innerHTML = data.map(o => `
                 <tr>
-                    <td>
-                        <div class="checkbox-custom ${selectedOrders.has(order.id) ? 'checked' : ''}" 
-                             onclick="toggleOrder('${order.id}')"></div>
-                    </td>
-                    <td><span class="order-id">${order.id}</span></td>
-                    <td>
-                        <div class="customer-name">${order.customer}</div>
-                        <div class="customer-email">${order.email}</div>
-                    </td>
-                    <td><span class="status-badge ${order.status}">${order.status}</span></td>
-                    <td><span class="status-badge ${order.fulfillment}">${order.fulfillment}</span></td>
-                    <td>$${order.total.toFixed(2)}</td>
-                    <td>${order.date}</td>
+                    <td class="checkbox-cell"><input type="checkbox" class="checkbox order-checkbox" data-id="${o.id}" ${selectedOrders.has(o.id) ? 'checked' : ''} onchange="toggleOrder('${o.id}')"></td>
+                    <td><span class="order-id">${o.id}</span></td>
+                    <td><div class="customer-info"><div class="customer-avatar">${o.customer.split(' ').map(n => n[0]).join('')}</div><div><div class="customer-name">${o.customer}</div><div class="customer-email">${o.email}</div></div></div></td>
+                    <td>${o.date}</td>
+                    <td><span class="status-badge ${o.status}">${o.status.charAt(0).toUpperCase() + o.status.slice(1)}</span></td>
+                    <td><span class="items-count">${o.items} item${o.items > 1 ? 's' : ''}</span></td>
+                    <td><span class="amount">$${o.amount.toFixed(2)}</span></td>
+                    <td><div class="actions-cell"><button class="action-btn" title="View"><i class="fas fa-eye"></i></button><button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button><button class="action-btn" title="Print"><i class="fas fa-print"></i></button></div></td>
                 </tr>
             `).join('');
         }
 
         function toggleOrder(id) {
-            if (selectedOrders.has(id)) {
-                selectedOrders.delete(id);
-            } else {
-                selectedOrders.add(id);
-            }
-            updateSelection();
-            renderOrders();
+            if (selectedOrders.has(id)) selectedOrders.delete(id);
+            else selectedOrders.add(id);
+            updateBulkPanel();
         }
 
         function toggleSelectAll() {
-            const selectAllEl = document.getElementById('selectAll');
-            if (selectedOrders.size === orders.length) {
-                selectedOrders.clear();
-                selectAllEl.classList.remove('checked');
-            } else {
-                orders.forEach(o => selectedOrders.add(o.id));
-                selectAllEl.classList.add('checked');
-            }
-            updateSelection();
+            const checked = document.getElementById('selectAllCheckbox').checked;
+            if (checked) orders.forEach(o => selectedOrders.add(o.id));
+            else selectedOrders.clear();
             renderOrders();
+            updateBulkPanel();
         }
 
-        function updateSelection() {
+        function selectAll() { document.getElementById('selectAllCheckbox').checked = true; toggleSelectAll(); }
+        function clearSelection() { document.getElementById('selectAllCheckbox').checked = false; toggleSelectAll(); }
+
+        function updateBulkPanel() {
             const count = selectedOrders.size;
             document.getElementById('selectedCount').textContent = count;
-            document.getElementById('bulkActions').classList.toggle('active', count > 0);
+            document.getElementById('bulkCount').textContent = count;
+            document.getElementById('bulkPanel').classList.toggle('active', count > 0);
         }
 
-        function clearSelection() {
-            selectedOrders.clear();
-            document.getElementById('selectAll').classList.remove('checked');
-            updateSelection();
-            renderOrders();
+        function filterOrders() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+            const filtered = orders.filter(o => {
+                const matchSearch = o.customer.toLowerCase().includes(search) || o.id.toLowerCase().includes(search);
+                const matchStatus = !status || o.status === status;
+                return matchSearch && matchStatus;
+            });
+            renderOrders(filtered);
         }
 
-        function bulkFulfill() {
-            alert(`Fulfilling ${selectedOrders.size} orders...`);
+        function sortTable(field) { /* Sorting logic */ }
+
+        function bulkAction(action) {
+            const count = selectedOrders.size;
+            const modal = document.getElementById('progressModal');
+            const bar = document.getElementById('progressBar');
+            const status = document.getElementById('progressStatus');
+            const title = document.getElementById('progressTitle');
+
+            title.textContent = `${action.charAt(0).toUpperCase() + action.slice(1)}ing ${count} orders...`;
+            modal.classList.add('active');
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        modal.classList.remove('active');
+                        selectedOrders.clear();
+                        updateBulkPanel();
+                        renderOrders();
+                    }, 500);
+                }
+                bar.style.width = progress + '%';
+                status.textContent = `${Math.min(count, Math.floor(progress / 100 * count))} / ${count} completed`;
+            }, 200);
         }
 
-        function bulkCancel() {
-            alert(`Cancelling ${selectedOrders.size} orders...`);
-        }
-
-        function bulkRefund() {
-            if (confirm(`Are you sure you want to refund ${selectedOrders.size} orders?`)) {
-                alert(`Refunding ${selectedOrders.size} orders...`);
-            }
-        }
-
-        function exportOrders() {
-            alert('Exporting orders to CSV...');
-        }
-
-        function refreshOrders() {
-            alert('Refreshing order list...');
-        }
-
-        // Initial render
         renderOrders();
     </script>
 </body>
