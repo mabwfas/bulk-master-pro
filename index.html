@@ -50,9 +50,6 @@
             padding: 1rem 2rem;
             background: var(--bg-card);
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .logo {
@@ -79,30 +76,23 @@
             padding: 1.5rem;
         }
 
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
+        .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
             margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .toolbar-left {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .toolbar-right {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
+        .card h3 i {
+            color: var(--primary);
         }
 
         .btn {
@@ -112,19 +102,15 @@
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            transition: all 0.3s;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: #fff;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
         }
 
         .btn-success {
@@ -148,18 +134,21 @@
             color: var(--text);
         }
 
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 1rem;
         }
 
         .search-box {
             display: flex;
             align-items: center;
+            padding: 0 1rem;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 0 1rem;
         }
 
         .search-box i {
@@ -178,80 +167,13 @@
             outline: none;
         }
 
-        .filter-dropdown {
-            position: relative;
-        }
-
-        .filter-dropdown select {
-            appearance: none;
-            background: rgba(255, 255, 255, 0.05);
+        select {
+            padding: 0.6rem 1rem;
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 0.6rem 2rem 0.6rem 1rem;
+            background: var(--bg-card);
             color: var(--text);
             cursor: pointer;
-        }
-
-        .stats-bar {
-            display: flex;
-            gap: 2rem;
-            padding: 1rem 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .stat-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-icon.total {
-            background: rgba(6, 182, 212, 0.2);
-            color: var(--primary);
-        }
-
-        .stat-icon.selected {
-            background: rgba(139, 92, 246, 0.2);
-            color: var(--secondary);
-        }
-
-        .stat-icon.fulfilled {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
-        .stat-icon.pending {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--warning);
-        }
-
-        .stat-value {
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .table-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
         }
 
         table {
@@ -261,36 +183,25 @@
 
         th {
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
+            text-align: left;
             color: var(--text-muted);
             font-weight: 500;
             font-size: 0.85rem;
-            text-align: left;
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
-            user-select: none;
         }
 
         th:hover {
             color: var(--text);
         }
 
-        th i {
-            margin-left: 0.5rem;
-            opacity: 0.5;
-        }
-
         td {
             padding: 1rem;
-            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
         tr:hover {
             background: rgba(255, 255, 255, 0.02);
-        }
-
-        .checkbox-cell {
-            width: 50px;
-            text-align: center;
         }
 
         .checkbox {
@@ -305,33 +216,6 @@
             color: var(--primary);
         }
 
-        .customer-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .customer-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .customer-name {
-            font-weight: 500;
-        }
-
-        .customer-email {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
         .status-badge {
             padding: 0.35rem 0.75rem;
             border-radius: 20px;
@@ -339,14 +223,14 @@
             font-weight: 500;
         }
 
-        .status-badge.fulfilled {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
         .status-badge.pending {
             background: rgba(245, 158, 11, 0.2);
             color: var(--warning);
+        }
+
+        .status-badge.fulfilled {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
         }
 
         .status-badge.cancelled {
@@ -354,80 +238,7 @@
             color: var(--danger);
         }
 
-        .status-badge.processing {
-            background: rgba(6, 182, 212, 0.2);
-            color: var(--primary);
-        }
-
-        .amount {
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .items-count {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .actions-cell {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .action-btn {
-            width: 32px;
-            height: 32px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            background: transparent;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .action-btn:hover {
-            background: var(--bg-card);
-            color: var(--text);
-            border-color: var(--primary);
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .page-info {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .page-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .page-btn {
-            width: 36px;
-            height: 36px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: transparent;
-            color: var(--text);
-            cursor: pointer;
-        }
-
-        .page-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .bulk-actions-panel {
+        .bulk-panel {
             position: fixed;
             bottom: 2rem;
             left: 50%;
@@ -440,33 +251,26 @@
             align-items: center;
             gap: 1rem;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            z-index: 200;
+            z-index: 100;
         }
 
-        .bulk-actions-panel.active {
+        .bulk-panel.active {
             display: flex;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
         }
 
         .selected-count {
             font-weight: 600;
             color: var(--primary);
-            min-width: 80px;
+            min-width: 100px;
         }
 
-        .progress-modal {
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .modal {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.8);
@@ -476,201 +280,245 @@
             z-index: 1000;
         }
 
-        .progress-modal.active {
+        .modal.active {
             display: flex;
         }
 
-        .progress-content {
+        .modal-content {
             background: var(--bg-dark);
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 2rem;
-            width: 400px;
-            text-align: center;
+            max-width: 500px;
+            width: 90%;
         }
 
-        .progress-bar-container {
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            margin: 1.5rem 0;
-            overflow: hidden;
+        .form-group {
+            margin-bottom: 1rem;
         }
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 6px;
-            transition: width 0.3s;
-        }
-
-        .progress-status {
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
         }
 
         footer {
             text-align: center;
             padding: 2rem;
             color: var(--text-muted);
-            margin-top: 2rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
     </style>
 </head>
 
 <body>
     <div class="bg-gradient"></div>
-
     <header>
         <div class="logo"><i class="fas fa-boxes-stacked"></i><span>BulkMaster Pro</span></div>
         <div style="display: flex; gap: 1rem;">
-            <button class="btn btn-outline"><i class="fas fa-download"></i> Export</button>
-            <button class="btn btn-primary"><i class="fas fa-sync"></i> Sync Orders</button>
+            <button class="btn btn-outline" onclick="importOrders()"><i class="fas fa-upload"></i> Import CSV</button>
+            <button class="btn btn-primary" onclick="showAddModal()"><i class="fas fa-plus"></i> Add Order</button>
         </div>
     </header>
 
     <main class="container">
-        <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-icon total"><i class="fas fa-shopping-cart"></i></div>
-                <div>
-                    <div class="stat-value" id="totalOrders">156</div>
-                    <div class="stat-label">Total Orders</div>
-                </div>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value" id="totalOrders">0</div>
+                <div class="stat-label">Total Orders</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-icon selected"><i class="fas fa-check-square"></i></div>
-                <div>
-                    <div class="stat-value" id="selectedCount">0</div>
-                    <div class="stat-label">Selected</div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-value" id="pendingOrders">0</div>
+                <div class="stat-label">Pending</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-icon fulfilled"><i class="fas fa-check-circle"></i></div>
-                <div>
-                    <div class="stat-value">89</div>
-                    <div class="stat-label">Fulfilled</div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-value" id="fulfilledOrders">0</div>
+                <div class="stat-label">Fulfilled</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-icon pending"><i class="fas fa-clock"></i></div>
-                <div>
-                    <div class="stat-value">67</div>
-                    <div class="stat-label">Pending</div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalRevenue">$0</div>
+                <div class="stat-label">Total Revenue</div>
             </div>
         </div>
 
-        <div class="toolbar">
-            <div class="toolbar-left">
+        <div class="card">
+            <div class="toolbar">
                 <div class="search-box"><i class="fas fa-search"></i><input type="text" placeholder="Search orders..."
                         id="searchInput" oninput="filterOrders()"></div>
-                <div class="filter-dropdown">
-                    <select id="statusFilter" onchange="filterOrders()">
-                        <option value="">All Status</option>
-                        <option value="fulfilled">Fulfilled</option>
-                        <option value="pending">Pending</option>
-                        <option value="processing">Processing</option>
-                        <option value="cancelled">Cancelled</option>
-                    </select>
-                </div>
-                <div class="filter-dropdown">
-                    <select id="dateFilter">
-                        <option value="all">All Time</option>
-                        <option value="today">Today</option>
-                        <option value="week">This Week</option>
-                        <option value="month">This Month</option>
-                    </select>
-                </div>
-            </div>
-            <div class="toolbar-right">
+                <select id="statusFilter" onchange="filterOrders()">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="fulfilled">Fulfilled</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
                 <button class="btn btn-outline" onclick="selectAll()"><i class="fas fa-check-double"></i> Select
                     All</button>
                 <button class="btn btn-outline" onclick="clearSelection()"><i class="fas fa-times"></i> Clear</button>
+                <button class="btn btn-outline" onclick="exportCSV()"><i class="fas fa-download"></i> Export
+                    CSV</button>
             </div>
-        </div>
 
-        <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th class="checkbox-cell"><input type="checkbox" class="checkbox" id="selectAllCheckbox"
+                        <th style="width:50px;"><input type="checkbox" class="checkbox" id="selectAllCheckbox"
                                 onchange="toggleSelectAll()"></th>
-                        <th onclick="sortTable('id')">Order <i class="fas fa-sort"></i></th>
-                        <th onclick="sortTable('customer')">Customer <i class="fas fa-sort"></i></th>
-                        <th onclick="sortTable('date')">Date <i class="fas fa-sort"></i></th>
-                        <th onclick="sortTable('status')">Status <i class="fas fa-sort"></i></th>
-                        <th onclick="sortTable('items')">Items <i class="fas fa-sort"></i></th>
-                        <th onclick="sortTable('amount')">Amount <i class="fas fa-sort"></i></th>
+                        <th onclick="sortBy('id')">Order ID</th>
+                        <th onclick="sortBy('customer')">Customer</th>
+                        <th onclick="sortBy('email')">Email</th>
+                        <th onclick="sortBy('date')">Date</th>
+                        <th onclick="sortBy('status')">Status</th>
+                        <th onclick="sortBy('items')">Items</th>
+                        <th onclick="sortBy('amount')">Amount</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="ordersTable"></tbody>
             </table>
-            <div class="pagination">
-                <div class="page-info">Showing 1-10 of 156 orders</div>
-                <div class="page-buttons">
-                    <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
         </div>
     </main>
 
-    <div class="bulk-actions-panel" id="bulkPanel">
-        <span class="selected-count"><span id="bulkCount">0</span> selected</span>
-        <button class="btn btn-success" onclick="bulkAction('fulfill')"><i class="fas fa-check"></i> Fulfill</button>
-        <button class="btn btn-warning" onclick="bulkAction('print')"><i class="fas fa-print"></i> Print Labels</button>
-        <button class="btn btn-primary" onclick="bulkAction('export')"><i class="fas fa-file-export"></i>
-            Export</button>
-        <button class="btn btn-danger" onclick="bulkAction('cancel')"><i class="fas fa-ban"></i> Cancel</button>
+    <div class="bulk-panel" id="bulkPanel">
+        <span class="selected-count"><span id="selectedCount">0</span> selected</span>
+        <button class="btn btn-success" onclick="bulkAction('fulfilled')"><i class="fas fa-check"></i> Mark
+            Fulfilled</button>
+        <button class="btn btn-warning" onclick="bulkAction('pending')"><i class="fas fa-clock"></i> Mark
+            Pending</button>
+        <button class="btn btn-danger" onclick="bulkAction('cancelled')"><i class="fas fa-ban"></i> Cancel</button>
+        <button class="btn btn-danger" onclick="bulkDelete()"><i class="fas fa-trash"></i> Delete</button>
     </div>
 
-    <div class="progress-modal" id="progressModal">
-        <div class="progress-content">
-            <h3 id="progressTitle">Processing Orders...</h3>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progressBar"></div>
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 1.5rem;">Add Order</h3>
+            <div class="form-group"><label>Customer Name</label><input type="text" id="customerName"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="customerEmail"></div>
+            <div class="form-group"><label>Number of Items</label><input type="number" id="itemCount" value="1"></div>
+            <div class="form-group"><label>Amount ($)</label><input type="number" id="orderAmount" step="0.01"></div>
+            <div class="form-group"><label>Status</label><select id="orderStatus">
+                    <option value="pending">Pending</option>
+                    <option value="fulfilled">Fulfilled</option>
+                </select></div>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button class="btn btn-primary" onclick="addOrder()" style="flex:1;"><i class="fas fa-plus"></i> Add
+                    Order</button>
+                <button class="btn btn-outline" onclick="hideAddModal()">Cancel</button>
             </div>
-            <div class="progress-status" id="progressStatus">0 / 0 completed</div>
         </div>
     </div>
 
     <footer>
-        <p>Part of the <a href="#">ShopifyHero Tools</a> suite</p>
+        <p>BulkMaster Pro - Manage orders in bulk</p>
     </footer>
 
     <script>
-        const orders = [
-            { id: '#1089', customer: 'John Doe', email: 'john@email.com', date: 'Dec 18, 2024', status: 'pending', items: 3, amount: 189.99 },
-            { id: '#1088', customer: 'Sarah Miller', email: 'sarah@email.com', date: 'Dec 18, 2024', status: 'fulfilled', items: 1, amount: 49.99 },
-            { id: '#1087', customer: 'Mike Johnson', email: 'mike@email.com', date: 'Dec 17, 2024', status: 'processing', items: 5, amount: 299.00 },
-            { id: '#1086', customer: 'Emily Brown', email: 'emily@email.com', date: 'Dec 17, 2024', status: 'fulfilled', items: 2, amount: 129.50 },
-            { id: '#1085', customer: 'David Wilson', email: 'david@email.com', date: 'Dec 16, 2024', status: 'pending', items: 1, amount: 79.99 },
-            { id: '#1084', customer: 'Lisa Anderson', email: 'lisa@email.com', date: 'Dec 16, 2024', status: 'cancelled', items: 4, amount: 450.00 },
-            { id: '#1083', customer: 'James Taylor', email: 'james@email.com', date: 'Dec 15, 2024', status: 'fulfilled', items: 2, amount: 199.99 },
-            { id: '#1082', customer: 'Jennifer Lee', email: 'jen@email.com', date: 'Dec 15, 2024', status: 'pending', items: 1, amount: 34.99 },
-        ];
-
+        let orders = JSON.parse(localStorage.getItem('bulkMasterOrders') || '[]');
         let selectedOrders = new Set();
+        let sortField = 'date';
+        let sortDir = 'desc';
 
-        function renderOrders(data = orders) {
+        function generateId() { return '#' + Math.random().toString(36).substr(2, 6).toUpperCase(); }
+
+        function renderOrders(data = null) {
+            const filtered = data || getFilteredOrders();
             const tbody = document.getElementById('ordersTable');
-            tbody.innerHTML = data.map(o => `
-                <tr>
-                    <td class="checkbox-cell"><input type="checkbox" class="checkbox order-checkbox" data-id="${o.id}" ${selectedOrders.has(o.id) ? 'checked' : ''} onchange="toggleOrder('${o.id}')"></td>
-                    <td><span class="order-id">${o.id}</span></td>
-                    <td><div class="customer-info"><div class="customer-avatar">${o.customer.split(' ').map(n => n[0]).join('')}</div><div><div class="customer-name">${o.customer}</div><div class="customer-email">${o.email}</div></div></div></td>
-                    <td>${o.date}</td>
-                    <td><span class="status-badge ${o.status}">${o.status.charAt(0).toUpperCase() + o.status.slice(1)}</span></td>
-                    <td><span class="items-count">${o.items} item${o.items > 1 ? 's' : ''}</span></td>
-                    <td><span class="amount">$${o.amount.toFixed(2)}</span></td>
-                    <td><div class="actions-cell"><button class="action-btn" title="View"><i class="fas fa-eye"></i></button><button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button><button class="action-btn" title="Print"><i class="fas fa-print"></i></button></div></td>
-                </tr>
-            `).join('');
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="empty-state">No orders found. Add your first order!</td></tr>';
+            } else {
+                tbody.innerHTML = filtered.map((o, i) => `
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" ${selectedOrders.has(o.id) ? 'checked' : ''} onchange="toggleOrder('${o.id}')"></td>
+                        <td><span class="order-id">${o.id}</span></td>
+                        <td>${o.customer}</td>
+                        <td>${o.email}</td>
+                        <td>${new Date(o.date).toLocaleDateString()}</td>
+                        <td><span class="status-badge ${o.status}">${o.status.charAt(0).toUpperCase() + o.status.slice(1)}</span></td>
+                        <td>${o.items} item${o.items > 1 ? 's' : ''}</td>
+                        <td>$${o.amount.toFixed(2)}</td>
+                        <td>
+                            <button class="btn btn-outline" style="padding: 0.4rem 0.6rem;" onclick="editOrder('${o.id}')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger" style="padding: 0.4rem 0.6rem;" onclick="deleteOrder('${o.id}')"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+            updateStats();
+            updateBulkPanel();
+        }
+
+        function getFilteredOrders() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+
+            let filtered = orders.filter(o => {
+                const matchSearch = o.customer.toLowerCase().includes(search) || o.id.toLowerCase().includes(search) || o.email.toLowerCase().includes(search);
+                const matchStatus = !status || o.status === status;
+                return matchSearch && matchStatus;
+            });
+
+            // Sort
+            filtered.sort((a, b) => {
+                let aVal = a[sortField];
+                let bVal = b[sortField];
+                if (sortField === 'date') { aVal = new Date(aVal); bVal = new Date(bVal); }
+                if (sortField === 'amount' || sortField === 'items') { aVal = Number(aVal); bVal = Number(bVal); }
+                if (aVal < bVal) return sortDir === 'asc' ? -1 : 1;
+                if (aVal > bVal) return sortDir === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            return filtered;
+        }
+
+        function sortBy(field) {
+            if (sortField === field) { sortDir = sortDir === 'asc' ? 'desc' : 'asc'; }
+            else { sortField = field; sortDir = 'asc'; }
+            renderOrders();
+        }
+
+        function filterOrders() { renderOrders(); }
+
+        function updateStats() {
+            document.getElementById('totalOrders').textContent = orders.length;
+            document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'pending').length;
+            document.getElementById('fulfilledOrders').textContent = orders.filter(o => o.status === 'fulfilled').length;
+            document.getElementById('totalRevenue').textContent = '$' + orders.reduce((sum, o) => sum + o.amount, 0).toFixed(2);
         }
 
         function toggleOrder(id) {
@@ -681,61 +529,128 @@
 
         function toggleSelectAll() {
             const checked = document.getElementById('selectAllCheckbox').checked;
-            if (checked) orders.forEach(o => selectedOrders.add(o.id));
+            const filtered = getFilteredOrders();
+            if (checked) filtered.forEach(o => selectedOrders.add(o.id));
             else selectedOrders.clear();
             renderOrders();
-            updateBulkPanel();
         }
 
         function selectAll() { document.getElementById('selectAllCheckbox').checked = true; toggleSelectAll(); }
         function clearSelection() { document.getElementById('selectAllCheckbox').checked = false; toggleSelectAll(); }
 
         function updateBulkPanel() {
-            const count = selectedOrders.size;
-            document.getElementById('selectedCount').textContent = count;
-            document.getElementById('bulkCount').textContent = count;
-            document.getElementById('bulkPanel').classList.toggle('active', count > 0);
+            document.getElementById('selectedCount').textContent = selectedOrders.size;
+            document.getElementById('bulkPanel').classList.toggle('active', selectedOrders.size > 0);
         }
 
-        function filterOrders() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const status = document.getElementById('statusFilter').value;
-            const filtered = orders.filter(o => {
-                const matchSearch = o.customer.toLowerCase().includes(search) || o.id.toLowerCase().includes(search);
-                const matchStatus = !status || o.status === status;
-                return matchSearch && matchStatus;
-            });
-            renderOrders(filtered);
+        function bulkAction(status) {
+            orders = orders.map(o => selectedOrders.has(o.id) ? { ...o, status } : o);
+            saveOrders();
+            selectedOrders.clear();
+            renderOrders();
         }
 
-        function sortTable(field) { /* Sorting logic */ }
+        function bulkDelete() {
+            if (!confirm(`Delete ${selectedOrders.size} orders?`)) return;
+            orders = orders.filter(o => !selectedOrders.has(o.id));
+            saveOrders();
+            selectedOrders.clear();
+            renderOrders();
+        }
 
-        function bulkAction(action) {
-            const count = selectedOrders.size;
-            const modal = document.getElementById('progressModal');
-            const bar = document.getElementById('progressBar');
-            const status = document.getElementById('progressStatus');
-            const title = document.getElementById('progressTitle');
+        function showAddModal() { document.getElementById('addModal').classList.add('active'); }
+        function hideAddModal() { document.getElementById('addModal').classList.remove('active'); }
 
-            title.textContent = `${action.charAt(0).toUpperCase() + action.slice(1)}ing ${count} orders...`;
-            modal.classList.add('active');
+        function addOrder() {
+            const customer = document.getElementById('customerName').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            const items = parseInt(document.getElementById('itemCount').value) || 1;
+            const amount = parseFloat(document.getElementById('orderAmount').value) || 0;
+            const status = document.getElementById('orderStatus').value;
 
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 20;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        modal.classList.remove('active');
-                        selectedOrders.clear();
-                        updateBulkPanel();
+            if (!customer || !email) { alert('Please fill in customer name and email'); return; }
+
+            orders.unshift({ id: generateId(), customer, email, items, amount, status, date: new Date().toISOString() });
+            saveOrders();
+            hideAddModal();
+            renderOrders();
+
+            // Clear form
+            ['customerName', 'customerEmail', 'itemCount', 'orderAmount'].forEach(id => document.getElementById(id).value = '');
+        }
+
+        function editOrder(id) {
+            const order = orders.find(o => o.id === id);
+            if (!order) return;
+
+            const newStatus = prompt('Enter new status (pending/fulfilled/cancelled):', order.status);
+            if (newStatus && ['pending', 'fulfilled', 'cancelled'].includes(newStatus)) {
+                order.status = newStatus;
+                saveOrders();
+                renderOrders();
+            }
+        }
+
+        function deleteOrder(id) {
+            if (!confirm('Delete this order?')) return;
+            orders = orders.filter(o => o.id !== id);
+            saveOrders();
+            renderOrders();
+        }
+
+        function saveOrders() { localStorage.setItem('bulkMasterOrders', JSON.stringify(orders)); }
+
+        function exportCSV() {
+            const headers = ['ID', 'Customer', 'Email', 'Date', 'Status', 'Items', 'Amount'];
+            const rows = orders.map(o => [o.id, o.customer, o.email, o.date, o.status, o.items, o.amount]);
+            const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'orders.csv';
+            a.click();
+        }
+
+        function importOrders() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.csv,.json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        if (file.name.endsWith('.json')) {
+                            orders = JSON.parse(event.target.result);
+                        } else {
+                            // Parse CSV
+                            const lines = event.target.result.split('\n').slice(1);
+                            lines.forEach(line => {
+                                const [id, customer, email, date, status, items, amount] = line.split(',');
+                                if (customer) {
+                                    orders.push({ id: id || generateId(), customer, email, date: date || new Date().toISOString(), status: status || 'pending', items: parseInt(items) || 1, amount: parseFloat(amount) || 0 });
+                                }
+                            });
+                        }
+                        saveOrders();
                         renderOrders();
-                    }, 500);
-                }
-                bar.style.width = progress + '%';
-                status.textContent = `${Math.min(count, Math.floor(progress / 100 * count))} / ${count} completed`;
-            }, 200);
+                        alert('Import successful!');
+                    } catch { alert('Invalid file format'); }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Add some sample data if empty
+        if (orders.length === 0) {
+            orders = [
+                { id: generateId(), customer: 'John Doe', email: 'john@email.com', date: new Date().toISOString(), status: 'pending', items: 3, amount: 149.99 },
+                { id: generateId(), customer: 'Sarah Miller', email: 'sarah@email.com', date: new Date(Date.now() - 86400000).toISOString(), status: 'fulfilled', items: 1, amount: 49.99 },
+                { id: generateId(), customer: 'Mike Johnson', email: 'mike@email.com', date: new Date(Date.now() - 172800000).toISOString(), status: 'pending', items: 5, amount: 299.00 }
+            ];
+            saveOrders();
         }
 
         renderOrders();
