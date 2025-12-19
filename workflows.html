@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflows - BulkMaster Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="api.js"></script>
+</head>
+
+<body>
+    <div class="bg-gradient"></div>
+
+    <nav class="sidebar">
+        <div class="sidebar-logo"><i class="fas fa-layer-group"></i><span>BulkMaster Pro</span></div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-box"></i> Orders</a></li>
+            <li class="nav-item"><a href="workflows.html" class="nav-link active"><i class="fas fa-robot"></i>
+                    Workflows</a></li>
+            <li class="nav-item"><a href="templates.html" class="nav-link"><i class="fas fa-file-alt"></i> Templates</a>
+            </li>
+            <li class="nav-item"><a href="analytics.html" class="nav-link"><i class="fas fa-chart-bar"></i>
+                    Analytics</a></li>
+            <li class="nav-item"><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Automation Workflows</h1>
+                <p class="page-subtitle">Create automated rules for bulk order processing</p>
+            </div>
+            <button class="btn btn-primary" onclick="showCreateModal()"><i class="fas fa-plus"></i> Create
+                Workflow</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon primary"><i class="fas fa-robot"></i></div>
+                <div class="stat-value" id="totalWorkflows">0</div>
+                <div class="stat-label">Active Workflows</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon success"><i class="fas fa-play"></i></div>
+                <div class="stat-value" id="totalRuns">0</div>
+                <div class="stat-label">Total Runs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warning"><i class="fas fa-box"></i></div>
+                <div class="stat-value" id="ordersAffected">0</div>
+                <div class="stat-label">Orders Affected</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-robot"></i> Your Workflows</h3>
+            </div>
+            <div id="workflowList"></div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title mb-2"><i class="fas fa-lightbulb"></i> Workflow Templates</h3>
+            <div class="grid-3">
+                <div class="workflow-card" onclick="useTemplate('auto-fulfill')">
+                    <div class="workflow-header">
+                        <span class="workflow-title">Auto-Fulfill Paid Orders</span>
+                        <span class="badge badge-primary">Popular</span>
+                    </div>
+                    <p class="workflow-meta">Automatically mark paid orders as fulfilled</p>
+                </div>
+                <div class="workflow-card" onclick="useTemplate('cancel-old')">
+                    <div class="workflow-header">
+                        <span class="workflow-title">Cancel Stale Orders</span>
+                    </div>
+                    <p class="workflow-meta">Cancel orders pending for over 7 days</p>
+                </div>
+                <div class="workflow-card" onclick="useTemplate('priority-tag')">
+                    <div class="workflow-header">
+                        <span class="workflow-title">Tag High-Value Orders</span>
+                    </div>
+                    <p class="workflow-meta">Add priority tag to orders over $500</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal" id="createModal"
+        style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1000;">
+        <div
+            style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; max-width: 600px; width: 90%;">
+            <h3 style="margin-bottom: 1.5rem;">Create Workflow</h3>
+            <div class="form-group">
+                <label class="form-label">Workflow Name</label>
+                <input type="text" class="form-input" id="wfName" placeholder="e.g. Auto-fulfill paid orders">
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="form-label">Condition: Order Status</label>
+                    <select class="form-select" id="wfCondStatus">
+                        <option value="">Any</option>
+                        <option value="pending">Pending</option>
+                        <option value="fulfilled">Fulfilled</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Condition: Min Amount</label>
+                    <input type="number" class="form-input" id="wfCondAmount" placeholder="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Action: Set Status To</label>
+                <select class="form-select" id="wfActionStatus">
+                    <option value="">No change</option>
+                    <option value="pending">Pending</option>
+                    <option value="fulfilled">Fulfilled</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Action: Add Tag</label>
+                <input type="text" class="form-input" id="wfActionTag" placeholder="e.g. priority, vip">
+            </div>
+            <div class="flex gap-2" style="margin-top: 1.5rem;">
+                <button class="btn btn-primary" onclick="createWorkflow()" style="flex: 1;"><i class="fas fa-plus"></i>
+                    Create</button>
+                <button class="btn btn-outline" onclick="hideCreateModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadWorkflows() {
+            const workflows = BulkAPI.workflows.getAll();
+
+            document.getElementById('totalWorkflows').textContent = workflows.length;
+            document.getElementById('totalRuns').textContent = workflows.reduce((sum, w) => sum + (w.runs || 0), 0);
+            document.getElementById('ordersAffected').textContent = workflows.reduce((sum, w) => sum + (w.affected || 0), 0);
+
+            renderWorkflows(workflows);
+        }
+
+        function renderWorkflows(workflows) {
+            const container = document.getElementById('workflowList');
+
+            if (workflows.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 3rem; color: var(--text-muted);">No workflows created yet. Create your first automation!</div>';
+                return;
+            }
+
+            container.innerHTML = workflows.map(w => `
+                <div class="workflow-card">
+                    <div class="workflow-header">
+                        <div>
+                            <span class="workflow-title">${w.name}</span>
+                            <div class="workflow-meta">${w.runs || 0} runs • Last: ${w.lastRun ? BulkAPI.format.timeAgo(w.lastRun) : 'Never'}</div>
+                        </div>
+                        <div class="flex gap-1">
+                            <button class="btn btn-sm btn-success" onclick="runWorkflow('${w.id}')"><i class="fas fa-play"></i> Run</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteWorkflow('${w.id}')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="flex gap-2" style="font-size: 0.85rem; color: var(--text-muted);">
+                        <span><strong>IF:</strong> ${w.condition?.status ? 'Status = ' + w.condition.status : 'All orders'}${w.condition?.minAmount ? ', Amount ≥ $' + w.condition.minAmount : ''}</span>
+                        <span><strong>THEN:</strong> ${w.action?.status ? 'Set status to ' + w.action.status : ''}${w.action?.tag ? 'Add tag: ' + w.action.tag : ''}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showCreateModal() { document.getElementById('createModal').style.display = 'flex'; }
+        function hideCreateModal() { document.getElementById('createModal').style.display = 'none'; }
+
+        function createWorkflow() {
+            const name = document.getElementById('wfName').value.trim();
+            if (!name) { BulkAPI.toast.error('Please enter a workflow name'); return; }
+
+            const workflow = {
+                name,
+                condition: {
+                    status: document.getElementById('wfCondStatus').value || null,
+                    minAmount: parseFloat(document.getElementById('wfCondAmount').value) || null
+                },
+                action: {
+                    status: document.getElementById('wfActionStatus').value || null,
+                    tag: document.getElementById('wfActionTag').value.trim() || null
+                }
+            };
+
+            BulkAPI.workflows.add(workflow);
+            hideCreateModal();
+            loadWorkflows();
+            BulkAPI.toast.success('Workflow created!');
+
+            // Clear form
+            ['wfName', 'wfCondStatus', 'wfCondAmount', 'wfActionStatus', 'wfActionTag'].forEach(id => {
+                const el = document.getElementById(id);
+                el.value = el.tagName === 'SELECT' ? '' : '';
+            });
+        }
+
+        function runWorkflow(id) {
+            const result = BulkAPI.workflows.run(id);
+            if (result.success) {
+                BulkAPI.toast.success(`Workflow ran! ${result.affected} orders affected.`);
+                loadWorkflows();
+            } else {
+                BulkAPI.toast.error(result.message);
+            }
+        }
+
+        function deleteWorkflow(id) {
+            if (!confirm('Delete this workflow?')) return;
+            BulkAPI.workflows.delete(id);
+            loadWorkflows();
+            BulkAPI.toast.success('Workflow deleted');
+        }
+
+        function useTemplate(type) {
+            document.getElementById('wfName').value =
+                type === 'auto-fulfill' ? 'Auto-Fulfill Paid Orders' :
+                    type === 'cancel-old' ? 'Cancel Stale Orders' :
+                        'Tag High-Value Orders';
+
+            if (type === 'auto-fulfill') {
+                document.getElementById('wfCondStatus').value = 'pending';
+                document.getElementById('wfActionStatus').value = 'fulfilled';
+            } else if (type === 'cancel-old') {
+                document.getElementById('wfCondStatus').value = 'pending';
+                document.getElementById('wfActionStatus').value = 'cancelled';
+            } else {
+                document.getElementById('wfCondAmount').value = '500';
+                document.getElementById('wfActionTag').value = 'priority';
+            }
+
+            showCreateModal();
+        }
+
+        loadWorkflows();
+    </script>
+</body>
+
+</html>
